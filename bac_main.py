@@ -56,15 +56,10 @@ while n >= 0:
     # Probabilities matrix (transition matrix)
     trans_matrix = [[0.1, 0.3, 0.2, 0.4], [0.2, 0.2, 0.4, 0.2], [0.4, 0.3, 0.1, 0.2], [0.2, 0.3, 0.3, 0.2]]
 
-    # checking consistency of transition matrix
-    if sum(trans_matrix[0])+sum(trans_matrix[1])+sum(trans_matrix[2])+sum(trans_matrix[3]) != 4:
-        print("\n","the trans_matrix is not consistent, mrbacco ... ")
-    else: print("\n", "trans_matrix is ok ... ")
-
     # definition of the main model
     def sentence_constr(sentences):
         i = 0
-        prob = 1
+        
         while i != sentences:
             sentence1 = ["nouns", "verbs", "adv", "object"]
             start_sentence = rm.choice(sentence1)  # Choose the starting sentence, randomly
@@ -73,88 +68,88 @@ while n >= 0:
             if start_sentence == "nouns":
                 change = np.random.choice(trans_name[0],replace=True,p=trans_matrix[0])
                 if change == "AB":
-                    prob = prob * 0.3
+                    
                     sentenceList.append(rm.choice(nouns))
                     print("we are at this point in the transition matrix: AB")
                     pass
                 if change == "AC":
-                    prob = prob * 0.2
+                    
                     start_sentence = "verbs"
                     sentenceList.append(rm.choice(verbs))
                     print("we are at this point in the transition matrix: AC")
                 elif change == "AD":
-                    prob = prob * 0.4
+                    
                     start_sentence = "adv"
                     sentenceList.append(rm.choice(adj))
                     print("we are at this point in the transition matrix: AD")
                 else:
-                    prob = prob * 0.1
+                    
                     start_sentence = "object"
                     sentenceList.append(rm.choice(adv))
                     print("we are at this point in the transition matrix: AA")
             elif start_sentence == "verbs":
                 change = np.random.choice(trans_name[1],replace=True,p=trans_matrix[1])
                 if change == "BA":
-                    prob = prob * 0.2
+                    
                     sentenceList.append(rm.choice(verbs))
                     print("we are at this point in the transition matrix: BA")
                     pass
                 if change == "BB":
-                    prob = prob * 0.2
+                
                     start_sentence = "nouns"
                     sentenceList.append(rm.choice(nouns))
                     print("we are at this point in the transition matrix: BB")
                 elif change == "BC":
-                    prob = prob * 0.2
+                    
                     start_sentence = "adv"
                     sentenceList.append(rm.choice(adj))
                     print("we are at this point in the transition matrix: BC")
                 else:
-                    prob = prob * 0.4
+                
                     start_sentence = "object"
                     sentenceList.append(rm.choice(adv))
                     print("we are at this point in the transition matrix: BD")
             elif start_sentence == "adv":
                 change = np.random.choice(trans_name[2],replace=True,p=trans_matrix[2])
                 if change == "CA":
-                    prob = prob * 0.4
+                    
                     sentenceList.append(rm.choice(adv))
                     print("we are at this point in the transition matrix: CA")
                     pass
                 if change == "CB":
-                    prob = prob * 0.3
+                    
                     start_sentence = "verbs"
                     sentenceList.append(rm.choice(nouns))
                     print("we are at this point in the transition matrix: CB")
                 elif change == "CC":
-                    prob = prob * 0.1
+                    
                     start_sentence = "adv"
                     sentenceList.append(rm.choice(verbs))
                     print("we are at this point in the transition matrix: CC")
                 else:
-                    prob = prob * 0.2
+                    
                     start_sentence = "object"
                     sentenceList.append(rm.choice(adj))
                     print("we are at this point in the transition matrix: CD")
             elif start_sentence == "object":
                 change = np.random.choice(trans_name[3],replace=True,p=trans_matrix[3])
                 if change == "DA":
-                    prob = prob * 0.2
+                    
                     sentenceList.append(rm.choice(adj))
                     print("we are at this point in the transition matrix: DA")
                     pass
                 if change == "DB":
-                    prob = prob * 0.2
+                    
                     start_sentence = "verbs"
                     sentenceList.append(rm.choice(nouns))
                     print("we are at this point in the transition matrix: DB")
                 elif change == "DC":
-                    prob = prob * 0.3
+                    
                     start_sentence = "adv"
                     sentenceList.append(rm.choice(verbs))
                     print("we are at this point in the transition matrix: DC")
                 else:
-                    prob = prob * 0.4
+                   
                     start_sentence = "nouns"
                     sentenceList.append(rm.choice(adv))
                     print("we are at this point in the transition matrix: DD")
